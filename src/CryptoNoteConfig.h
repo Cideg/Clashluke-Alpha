@@ -35,10 +35,29 @@ const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW             = 60;
 
 // MONEY_SUPPLY - total number coins to be generated
 const uint64_t MONEY_SUPPLY                                  = UINT64_C(18446744073709551615);
+const size_t MIN_MIXIN                          = 0;
+const uint8_t MANDATORY_MIXIN_BLOCK_VERSION     = 0;
+const uint32_t MIXIN_START_HEIGHT                          = 0;
+const uint32_t MANDATORY_TRANSACTION                          = 0;
+const uint32_t KILL_HEIGHT                          = 0;
+const uint64_t TAIL_EMISSION_REWARD                          = 0;
+const size_t CRYPTONOTE_COIN_VERSION                          = 0;
 const uint32_t ZAWY_DIFFICULTY_BLOCK_INDEX                 = 30;
 const uint32_t ZAWY_DIFFICULTY_LAST_BLOCK                 = 0;
 const uint64_t ZAWY_DIFFICULTY_MIN                 = 1;
+const uint32_t ZAWY_LWMA_DIFFICULTY_BLOCK_INDEX                 = 0;
+const uint32_t ZAWY_LWMA_DIFFICULTY_LAST_BLOCK                 = 0;
+const uint64_t ZAWY_LWMA_DIFFICULTY_MIN                 = 1;
+const size_t ZAWY_LWMA_DIFFICULTY_N                 = 0;
+const uint32_t ZAWY_LWMA2_DIFFICULTY_BLOCK_INDEX                 = 0;
+const uint32_t ZAWY_LWMA2_DIFFICULTY_LAST_BLOCK                 = 0;
+const uint64_t ZAWY_LWMA2_DIFFICULTY_MIN                 = 1;
+const size_t ZAWY_LWMA2_DIFFICULTY_N                 = 0;
+const uint32_t BUGGED_ZAWY_DIFFICULTY_BLOCK_INDEX                 = 0;
+const uint32_t POW_CRYPTONIGHT_V7_BLOCK_INDEX                 = 0;
+const uint32_t POW_CRYPTONIGHT_V7_LAST_BLOCK                 = 0;
 const unsigned EMISSION_SPEED_FACTOR                         = 18;
+const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(0);
 static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED_FACTOR");
 
 const size_t   CRYPTONOTE_REWARD_BLOCKS_WINDOW               = 100;
@@ -50,18 +69,20 @@ const size_t   CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE        = 600;
 const size_t   CRYPTONOTE_DISPLAY_DECIMAL_POINT              = 11;
 const uint64_t MINIMUM_FEE                                   = UINT64_C(1000000);
 const uint64_t DEFAULT_DUST_THRESHOLD                        = UINT64_C(1000000);
+const uint64_t MAX_TRANSACTION_SIZE_LIMIT                          = 100000;
+const uint64_t DEFAULT_FEE                          = MINIMUM_FEE;
 
 const uint64_t DIFFICULTY_TARGET                             = 120; // seconds
 const uint64_t EXPECTED_NUMBER_OF_BLOCKS_PER_DAY             = 24 * 60 * 60 / DIFFICULTY_TARGET;
-const size_t   DIFFICULTY_WINDOW                                = 17;
+const size_t   DIFFICULTY_WINDOW                             = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY; // blocks
 const size_t   DIFFICULTY_WINDOW_V1                          = 720;
 const size_t   DIFFICULTY_WINDOW_V2                          = 720;
-const size_t   DIFFICULTY_CUT                                = 0;  // timestamps to cut after sorting
-const size_t   DIFFICULTY_CUT_V1                             = 60;
-const size_t   DIFFICULTY_CUT_V2                             = 60;
-const size_t   DIFFICULTY_LAG                                = 0;  // !!!
-const size_t   DIFFICULTY_LAG_V1                             = 15;
-const size_t   DIFFICULTY_LAG_V2                             = 15;
+const size_t   DIFFICULTY_CUT                                = 60;  // timestamps to cut after sorting
+const size_t   DIFFICULTY_CUT_V1                             = DIFFICULTY_CUT;
+const size_t   DIFFICULTY_CUT_V2                             = DIFFICULTY_CUT;
+const size_t   DIFFICULTY_LAG                                = 15;  // !!!
+const size_t   DIFFICULTY_LAG_V1                             = DIFFICULTY_LAG;
+const size_t   DIFFICULTY_LAG_V2                             = DIFFICULTY_LAG;
 static_assert(2 * DIFFICULTY_CUT <= DIFFICULTY_WINDOW - 2, "Bad DIFFICULTY_WINDOW or DIFFICULTY_CUT");
 
 const size_t   MAX_BLOCK_SIZE_INITIAL                        = 100000;
@@ -93,9 +114,10 @@ const char     CRYPTONOTE_BLOCKINDEXES_FILENAME[]            = "blockindexes.bin
 const char     CRYPTONOTE_POOLDATA_FILENAME[]                = "poolstate.bin";
 const char     P2P_NET_DATA_FILENAME[]                       = "p2pstate.bin";
 const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff0001ffffffffffff0f029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101a0336f0cf474b2736f7f579ab5337392a7d71517b3c91cc84c7df02dd7eb22a4";
 } // parameters
 
-const char     CRYPTONOTE_NAME[]                             = "clashcoin";
+const char     CRYPTONOTE_NAME[]                             = "clashluke";
 
 const uint8_t  TRANSACTION_VERSION_1                         =  1;
 const uint8_t  TRANSACTION_VERSION_2                         =  2;
@@ -126,6 +148,12 @@ const uint32_t P2P_DEFAULT_CONNECTION_TIMEOUT                = 5000;          //
 const uint32_t P2P_DEFAULT_PING_CONNECTION_TIMEOUT           = 2000;          // 2 seconds
 const uint64_t P2P_DEFAULT_INVOKE_TIMEOUT                    = 60 * 2 * 1000; // 2 minutes
 const size_t   P2P_DEFAULT_HANDSHAKE_INVOKE_TIMEOUT          = 5000;          // 5 seconds
+
+const uint32_t  P2P_FAILED_ADDR_FORGET_SECONDS                  = (60*60);     //1 hour
+const uint32_t  P2P_IP_BLOCKTIME                                 = (60*60*24);  //24 hour
+const uint32_t  P2P_IP_FAILS_BEFORE_BLOCK                       = 10;
+const uint32_t  P2P_IDLE_CONNECTION_KILL_INTERVAL               = (5*60); //5 minutes
+
 const char     P2P_STAT_TRUSTED_PUB_KEY[]                    = "";
 
 const char* const SEED_NODES[] = { "173.212.249.18:48766", "85.25.34.213:48766" };
